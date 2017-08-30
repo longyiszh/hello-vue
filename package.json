@@ -1,0 +1,13 @@
+{
+  "name": "hello-vue",
+  "version": "0.1.0",
+  "description": "Helping wcxaaa learn vue",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "author": "longyiszh",
+  "license": "MIT"
+}
