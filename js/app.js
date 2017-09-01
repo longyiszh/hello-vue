@@ -13,7 +13,8 @@ const eventData = {
   sdk: 0,
 
   x: 0,
-  y: 0
+  y: 0,
+  kEventMsg: ''
 };
 
 const appEntry = new Vue({
@@ -31,7 +32,7 @@ const eventBinding = new Vue({
   el: "#eventBinding",
   data: eventData,
   methods: {
-    change: (dk, op, delta=1) => {
+    change: (dk, op, delta) => {
       if (op === "+") {
         eventData[dk]++;
       }
@@ -42,6 +43,15 @@ const eventBinding = new Vue({
     updateXY: (e) => {
       eventData.x = e.offsetX,
       eventData.y = e.offsetY
+    },
+    bombardFailure: (target) => {
+      alert(`${target} has prevented from your bombarding.`);
+    },
+    bombardUnsuccessful: (target) => {
+      alert(`Your bombarding to ${target}'s home page is unsuccessful, so you are going there manually.`);
+    },
+    logInputContent: () => {
+      alert(`You just input ${eventData.kEventMsg}`);
     }
   }
 });

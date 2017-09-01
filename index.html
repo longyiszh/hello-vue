@@ -43,8 +43,9 @@
           </td>
           <td>
             <div>
-              <button @click="change('bdk', '+')" v-on:dblclick="change('bdk', '+', 2000)">+</button>
-              <button @click="change('bdk', '-')" v-on:dblclick="change('bdk', '-', 2000)">-</button>
+              <button @click.once="change('bdk', '+', 1)" v-on:dblclick="change('bdk', '+', 2000)">+</button>
+              <button @click="change('bdk', '-', 1)" v-on:dblclick="change('bdk', '-', 2000)">-</button>
+              <a v-on:click.prevent="bombardFailure('Billy')" href="http://www.linruotian.com">轰炸主页</a>
             </div>
           </td> 
         </tr>
@@ -57,8 +58,9 @@
           </td>
           <td>
             <div>
-                <button v-on:click="change('mdk', '+')" @dblclick="change('mdk', '+', 3000)">+</button>
-                <button v-on:click="change('mdk', '-')" @dblclick="change('mdk', '-', 300)">-</button>
+                <button v-on:click.once="change('mdk', '+', 1)" @dblclick="change('mdk', '+', 3000)">+</button>
+                <button v-on:click="change('mdk', '-', 1)" @dblclick="change('mdk', '-', 300)">-</button>
+                <a v-on:click.prevent="bombardFailure('Mile')" href="http://www.mile.com">轰炸主页</a>
             </div>
           </td> 
         </tr>
@@ -71,8 +73,9 @@
           </td>
           <td>
             <div>
-                <button @click="change('sdk', '+')" v-on:dblclick="change('sdk', '+', 10000)">+</button>
-                <button @click="change('sdk', '-')" v-on:dblclick="change('sdk', '-', 1000)">-</button>
+                <button @click="change('sdk', '+', 1)" v-on:dblclick="change('sdk', '+', 10000)">+</button>
+                <button @click="change('sdk', '-', 1)" v-on:dblclick="change('sdk', '-', 1000)">-</button>
+                <a v-on:click="bombardUnsuccessful('Steve')" href="http://www.wcnexus.com" target="_blank">轰炸主页</a>
             </div>
           </td> 
         </tr>
@@ -81,6 +84,12 @@
     <div class="canvas" v-on:mousemove="updateXY">
       <!-- no need to specify parameter "e" in parenthesis () 'cuz vue automatically fetch that -->
       {{ x }}, {{ y }}
+    </div>
+    <div>
+      <h2>Keyboard Event</h2>
+      <small>Press Enter when finished entering</small>
+      <input v-on:keyup.enter="logInputContent" v-model="kEventMsg" type="text" placeholder="enter something here">
+      <small>In fact, it also involves a kind of two-way binding.</small>
     </div>
   </div>
 
