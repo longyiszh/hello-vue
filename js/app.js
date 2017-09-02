@@ -95,6 +95,13 @@ const computedProData = {
 
 }
 
+const BData = {
+  status: "Active"
+};
+
+const SData = {
+  status: "Active"
+};
 const appEntry = new Vue({
   el: "#appEntry",
   data: vueData,
@@ -156,4 +163,49 @@ const computedPro = new Vue({
       return computedProData.shark;
     }
   }
+});
+
+
+
+const factB = new Vue({
+  el: "#factB",
+  data: BData,
+  methods: {
+    repair: () => {
+      BData.status = "Active";
+    }
+  },
+  computed: {
+
+  }
+});
+
+const factS = new Vue({
+  el: "#factS",
+  data: SData,
+  methods: {
+    fireBHouse: () => {
+      factB.status = "BOOM!!!";
+    }
+  }
+});
+
+const vote = Vue.component('vote', {
+  template: `<p>vote: {{ vote }} <button @click="voteFor()">+1</button></p>`,
+  data: () => {
+    //必须是函数
+    return {
+      vote: 0
+    }
+  },
+  methods: {
+    voteFor: function () {
+      console.log(this);
+      this.vote++;
+    }
+  }
+});
+
+const cmpTest = new Vue({
+  el: "#cmpTest"
 });
