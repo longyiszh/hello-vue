@@ -5,3 +5,7 @@ div.canvas{
     text-align: center;
     border: 3px solid #333;
 }
+
+h1.boom > span.boom {
+    font-size: 40rem;
+}

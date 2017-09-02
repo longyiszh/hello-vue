@@ -11,11 +11,22 @@
   <div id="appEntry">
     <p>{{ gdh }}</p> 
     <p>{{ darnify("Billy") }}</p>
+    <h1 v-on:click="boomed = !boomed" v-bind:class="booming" >Click to <span class="boom">Boom</span></h1>
     <a v-bind:href="site">BDK</a>
     <p v-html="html"></p>
     <p>
       <input type="text" v-bind:value="gdh">
     </p>
+    <div>
+      <h3>Steve问你这个网页做的漂不漂亮 [v-if] [v-show]</h3>
+      <p>
+        <button v-if="false">丑爆了！</button>
+        <button @click="sayThanks()" v-if="true">美极了！</button>
+        <button v-show="false">噗！赔我嘴里的爆米花</button>
+        <button v-if="false">丑的我家的猫都吓跑了！</button>
+        <button disabled="disabled" v-show="true">美！岂不美哉！（5毛一条）</button>
+      </p>
+    </div>
   </div>
 
   <div id="eventBinding">

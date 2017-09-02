@@ -4,7 +4,8 @@ const vueData = {
   gdh: "高端黑 Gaoduanhei",
   caster: "Steve",
   site: "http://www.linruotian.com",
-  html: "<a href='http://www.linruotian.com'>Collect BDK</a>"
+  html: "<a href='http://www.linruotian.com'>Collect BDK</a>",
+  boomed: false
 };
 
 const eventData = {
@@ -35,6 +36,16 @@ const appEntry = new Vue({
     darnify: (target) => {
       // console.log(this); // window
       return `Boom!${target} has been blackend by ${vueData.caster}`;
+    },
+    sayThanks: () => {
+      alert("谢谢你的支持！Mua~");
+    }
+  },
+  computed: {
+    booming: () => {
+      return {
+        boom: vueData.boomed
+      }
     }
   }
 });
