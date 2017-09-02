@@ -30,9 +30,13 @@
   </div>
 
   <div id="eventBinding">
+    <h2>[v-for] [v-if] [event-binding]</h2>
     <table>
       <thead>
         <tr>
+          <td>
+            <span>#</span>
+          </td>
           <td>
             <span>CDKey</span>
           </td>
@@ -45,48 +49,34 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr v-for="let (faction, index) of cdkwar">
           <td>
-            <span>BDK</span>
+              <span>{{ index }}</span>
           </td> 
           <td>
-            <span>{{ bdk }}</span>
+            <span style="text-transform: uppercase;">{{ faction.cdk }}</span>
+          </td> 
+          <td>
+            <span>{{ faction.num }}</span>
           </td>
           <td>
             <div>
-              <button @click.once="change('bdk', '+', 1)" v-on:dblclick="change('bdk', '+', 2000)">+</button>
-              <button @click="change('bdk', '-', 1)" v-on:dblclick="change('bdk', '-', 2000)">-</button>
-              <a v-on:click.prevent="bombardFailure('Billy')" href="http://www.linruotian.com">轰炸主页</a>
-            </div>
-          </td> 
-        </tr>
-        <tr>
-          <td>
-            <span>MDK</span>
-          </td> 
-          <td>
-            <span>{{ mdk }}</span>
-          </td>
-          <td>
-            <div>
-                <button v-on:click.once="change('mdk', '+', 1)" @dblclick="change('mdk', '+', 3000)">+</button>
-                <button v-on:click="change('mdk', '-', 1)" @dblclick="change('mdk', '-', 300)">-</button>
-                <a v-on:click.prevent="bombardFailure('Mile')" href="http://www.mile.com">轰炸主页</a>
-            </div>
-          </td> 
-        </tr>
-        <tr>
-          <td>
-            <span>SDK</span>
-          </td> 
-          <td>
-            <span>{{ sdk }}</span>
-          </td>
-          <td>
-            <div>
-                <button @click="change('sdk', '+', 1)" v-on:dblclick="change('sdk', '+', 10000)">+</button>
-                <button @click="change('sdk', '-', 1)" v-on:dblclick="change('sdk', '-', 1000)">-</button>
-                <a v-on:click="bombardUnsuccessful('Steve')" href="http://www.wcnexus.com" target="_blank">轰炸主页</a>
+              <!-- note that template will not get rendered by vue -->
+              <template v-if="faction.name === 'Billy'">
+                  <button @click.once="change(faction.name, '+', 1)" v-on:dblclick="change(faction.name, '+', 2000)">+</button>
+                  <button @click="change(faction.name, '-', 1)" v-on:dblclick="change(faction.name, '-', 2000)">-</button>
+                  <a v-on:click.prevent="bombardPHP(faction.name, faction.bFactor)" v-bind:href="faction.php">轰炸主页</a>
+              </template>
+              <template v-else-if="faction.name === 'Mile'">
+                  <button @click="change(faction.name, '+', 1)" v-on:dblclick.once="change(faction.name, '+', 3000)">+</button>
+                  <button @click="change(faction.name, '-', 1)" v-on:dblclick="change(faction.name, '-', 300)">-</button>
+                  <a v-on:click.prevent="bombardPHP(faction.name, faction.bFactor)" v-bind:href="faction.php">轰炸主页</a>
+              </template>
+              <template v-else="faction.name === 'Steve'">
+                  <button @click="change(faction.name, '+', 1)" v-on:dblclick="change(faction.name, '+', 2000)">+</button>
+                  <button @click="change(faction.name, '-', 1)" v-on:dblclick.once="change(faction.name, '-', 2000)">-</button>
+                  <a v-on:click="bombardPHP(faction.name, faction.bFactor)" v-bind:href="faction.php">轰炸主页</a>
+              </template>
             </div>
           </td> 
         </tr>

@@ -9,13 +9,79 @@ const vueData = {
 };
 
 const eventData = {
-  bdk: 0,
-  mdk: 0,
-  sdk: 0,
+
+  cdkwar: [
+    {
+      name: 'Billy',
+      cdk: 'bdk',
+      num: 0,
+      php: 'http://www.linruotian.com',
+      bFactor: 0.888
+    },
+    {
+      name: 'Mile',
+      cdk: 'mdk',
+      num: 0,
+      php: 'http://www.mile.com',
+      bFactor: 0.999
+    },
+    {
+      name: 'Steve',
+      cdk: 'sdk',
+      num: 0,
+      php: 'http://www.wcnexus.com',
+      bFactor: 1.001
+    }
+  ],
 
   x: 0,
   y: 0,
   kEventMsg: ''
+};
+
+const ebMethods = {
+  searchFaction: (factName) => {
+    for (let fact of eventData.cdkwar) {
+      if (factName === fact.name) {
+        return fact;
+      }
+    }
+    return null;
+  },
+  change: (name, op, delta) => {
+    let fact = ebMethods.searchFaction(name);
+    if (fact) {
+      if (op === "+") {
+        fact.num += delta;
+      }
+      else if (op === "-") {
+        fact.num -= delta;
+      }
+    } else {
+      console.error("Invalid faction name");
+    }
+
+  },
+  updateXY: (e) => {
+    eventData.x = e.offsetX,
+    eventData.y = e.offsetY
+  },
+  bombardPHP: (target, factor) => {
+    if (factor <= 1) {
+      alert(`${target} has prevented your bombarding.`);
+    } else {
+      alert(`Your bombarding to ${target}'s home page is unsuccessful, so you are going there manually.`);
+    }
+  },
+  // bombardFailure: (target) => {
+  //   alert(`${target} has prevented from your bombarding.`);
+  // },
+  // bombardUnsuccessful: (target) => {
+  //   alert(`Your bombarding to ${target}'s home page is unsuccessful, so you are going there manually.`);
+  // },
+  logInputContent: () => {
+    alert(`You just input ${eventData.kEventMsg}`);
+  }
 };
 
 const computedProData = {
@@ -53,29 +119,7 @@ const appEntry = new Vue({
 const eventBinding = new Vue({
   el: "#eventBinding",
   data: eventData,
-  methods: {
-    change: (dk, op, delta) => {
-      if (op === "+") {
-        eventData[dk]++;
-      }
-      else if (op === "-") {
-        eventData[dk]--;
-      }
-    },
-    updateXY: (e) => {
-      eventData.x = e.offsetX,
-      eventData.y = e.offsetY
-    },
-    bombardFailure: (target) => {
-      alert(`${target} has prevented from your bombarding.`);
-    },
-    bombardUnsuccessful: (target) => {
-      alert(`Your bombarding to ${target}'s home page is unsuccessful, so you are going there manually.`);
-    },
-    logInputContent: () => {
-      alert(`You just input ${eventData.kEventMsg}`);
-    }
-  }
+  methods: ebMethods
 });
 
 const computedPro = new Vue({
