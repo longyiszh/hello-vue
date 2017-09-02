@@ -93,6 +93,43 @@
     </div>
   </div>
 
+  <div id="computedPro">
+    <h2>Computed Property</h2>
+    <section>
+      <h3>Originally using method:</h3>
+      <small>Watch out in console!</small>
+      <div>
+        <button @click="dog++">+ Dog</button>
+        <button @click="cat++">+ Cat</button>
+        <button @click="fish++">+ Fish</button>
+      </div>
+      <div>
+        <p>Remaining dog: {{ calcDog() }}</p>  
+        <p>Remaining cat: {{ calcCat() }}</p>  
+        <p>Remaining fish: {{ calcFish() }}</p>  
+      </div>
+      <small>Dog, cat and fish get computed every time.</small>
+    </section>
+
+    <section>
+      <h3>now using computed property:</h3>
+      <small>Watch out in console!</small>
+      <div>
+        <button @click="hound++">+ Hound</button>
+        <button @click="leopard++">+ Leopard</button>
+        <button @click="shark++">+ Shark</button>
+      </div>
+      <div>
+      <p>Remaining hound: {{ calcHound }}</p>  
+      <p>Remaining leopard: {{ calcLeopard }}</p>  
+      <p>Remaining shark: {{ calcShark }}</p>  
+      </div>
+      <small>Hound, leopard and shark are only computed when needed.</small>
+    </section>
+
+  </div>
+
+
   <script src="https://unpkg.com/vue"></script>
   <script src="js/app.js"></script>
 </body>

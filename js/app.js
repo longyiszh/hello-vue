@@ -17,6 +17,17 @@ const eventData = {
   kEventMsg: ''
 };
 
+const computedProData = {
+  dog: 0,
+  cat: 0,
+  fish: 0,
+
+  hound: 0,
+  leopard: 0,
+  shark: 0
+
+}
+
 const appEntry = new Vue({
   el: "#appEntry",
   data: vueData,
@@ -52,6 +63,42 @@ const eventBinding = new Vue({
     },
     logInputContent: () => {
       alert(`You just input ${eventData.kEventMsg}`);
+    }
+  }
+});
+
+const computedPro = new Vue({
+  el: "#computedPro",
+  data: computedProData,
+  methods: {
+    // modNum: (target, num) => {
+    //   computedProData[target] += num;
+    // },
+    calcDog: () => {
+      console.log("dog computed");
+      return computedProData.dog;
+    },
+    calcCat: () => {
+      console.log("cat computed");
+      return computedProData.cat - computedProData.dog;
+    },
+    calcFish: () => {
+      console.log("fish computed");
+      return computedProData.fish - (computedProData.cat - computedProData.dog);
+    }
+  },
+  computed: {
+    calcHound: () => {
+      console.log("hound computed");
+      return computedProData.hound - (computedProData.leopard - computedProData.shark);
+    },
+    calcLeopard: () => {
+      console.log("leopard computed");
+      return computedProData.leopard - computedProData.shark;
+    },
+    calcShark: () => {
+      console.log("shark computed");
+      return computedProData.shark;
     }
   }
 });
