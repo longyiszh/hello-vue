@@ -200,12 +200,23 @@ const vote = Vue.component('vote', {
   },
   methods: {
     voteFor: function () {
-      console.log(this);
       this.vote++;
     }
   }
 });
 
 const cmpTest = new Vue({
-  el: "#cmpTest"
+  el: "#cmpTest",
+  data: {
+    newMsg: false
+  },
+  methods: {
+    glance: () => {
+      console.log(cmpTest.$refs.cmpTest.innerHTML);
+      cmpTest.newMsg = true;
+    }
+  },
+  computed: {
+
+  }
 });

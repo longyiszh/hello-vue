@@ -152,12 +152,16 @@
 
   </section>
 
-  <section id="cmpTest">
-    <h2>Template</h2>
+  <section id="cmpTest" ref="cmpTest">
+    <h1 v-show="newMsg">You have a new message from your console</h1>
+    <h2>vote for handsome [component, ref]</h2>
     <p>longyiszh: </p>
     <vote></vote>
     <p>valorad: </p>
     <vote></vote>
+    <div>
+      <button @click="glance()"> glance </button>
+    </div>
   </section>
 
 
