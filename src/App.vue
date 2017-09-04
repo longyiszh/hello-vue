@@ -1,60 +1,45 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  <div>
+    <header>
+      <h1 class="title">{{ title }}</h1>
+    </header>
+    <main class="title">
+      <p>Helping wcxaaa learn vue</p>
+      <small>{{ sayHello("wcxaaa") }}</small>
+    </main>
   </div>
+  <!-- 只能写一个div，没有第二个 -->
 </template>
 
 <script>
 export default {
-  name: 'app',
+  title: 'hello-vue',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      title: 'hello-vue'
+    }
+  },
+  methods: {
+    sayHello: (target) => {
+      return `Welcome ${target} to dig your vue (grave)!`
     }
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import "assets/scss/color";
+
+h1.title {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 
-h1, h2 {
-  font-weight: normal;
+main.title {
+  text-align: center;
+  small {
+    font-weight: bolder;
+    color: $red;
+  }
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
 </style>
