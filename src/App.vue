@@ -6,6 +6,7 @@
     <main class="title">
       <p>Helping wcxaaa learn vue</p>
       <small>{{ sayHello("wcxaaa") }}</small>
+      <cdk-war></cdk-war>
     </main>
   </div>
   <!-- 只能写一个div，没有第二个 -->
