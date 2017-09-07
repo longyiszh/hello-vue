@@ -10,7 +10,11 @@
       
     <section class="warzone">
       <h2>WarZone [component interaction - props & vue-custom-event]</h2>
-      <enemy-zone v-bind:bHouse="warZone.bHouse" v-on:bFire="warZone.sHouse.status=$event"></enemy-zone>
+      <h3>(event-bus, life-cycle-hook)</h3>
+
+      <enemy-zone v-bind:bHouse="warZone.bHouse"></enemy-zone> 
+      <!--  v-on:bFire="warZone.sHouse.status=$event" is used when enemyZone directly fires that event -->
+
       <h1 class="vs">VS</h1>
       <div class="factS">
         <p><span class="faction">SHouse</span></p>
@@ -30,7 +34,10 @@
 
 <script>
 import cdkWar from './components/cdkWar.vue';
-import enemyZone from './components/enemyZone.vue'
+import enemyZone from './components/enemyZone.vue';
+
+import { busA } from './busA';
+
 
 const cdkWarData = {
   cdkwar: [
@@ -73,7 +80,12 @@ export default {
     "cdk-war": cdkWar,
     "enemy-zone": enemyZone
   },
-  data () {
+  created() {
+    busA.$on("bFire", (data) => {
+      warZone.sHouse.status = data;
+    });
+  },
+  data() {
     return {
       title: 'hello-vue',
       cdkWarData: cdkWarData,

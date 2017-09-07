@@ -12,9 +12,10 @@
 
 <script>
 
-
+import { busA } from '../busA';
 
 export default {
+
   props: {
     bHouse: {
       type: Object,
@@ -31,7 +32,10 @@ export default {
       this.bHouse.status = "active"
     },
     fireSHouse() {
-      this.$emit('bFire', "Boommmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm~")
+      // directly emit event
+      // this.$emit('bFire', "Boommmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm~")
+      // emit via a third vue instance (bus)
+      busA.$emit('bFire', "Boommmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm~");
     }
   }
 }
