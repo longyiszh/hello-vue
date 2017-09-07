@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>[v-for] [v-if] [event-binding]</h2>
+    <h2>[v-for] [v-if] [event-binding] [vue-props]</h2>
     <table class="warTable">
       <thead>
         <tr>
@@ -60,47 +60,35 @@
 
 <script>
 
-const data = {
-  cdkwar: [
-    {
-      name: 'Billy',
-      cdk: 'bdk',
-      num: 0,
-      php: 'http://www.linruotian.com',
-      bFactor: 0.888
-    },
-    {
-      name: 'Mile',
-      cdk: 'mdk',
-      num: 0,
-      php: 'http://www.mile.com',
-      bFactor: 0.999
-    },
-    {
-      name: 'Steve',
-      cdk: 'sdk',
-      num: 0,
-      php: 'http://www.wcnexus.com',
-      bFactor: 1.001
-    }
-  ]
-};
+const data = {};
 
-export default {
-  data: () => { return data},
-  methods: {
-    
-    searchFaction: (factName) => {
-      for (let fact of this.default.data().cdkwar) {
+const publicMethods = {
+    searchFaction: (factName, factData) => {
+      for (let fact of factData) {
         if (factName === fact.name) {
           return fact;
         }
       }
       return null;
     },
+}
 
-    change: (name, op, delta) => {
-      let fact = this.default.methods.searchFaction(name);
+export default {
+  //props: ["cdkwar"],
+
+  // validation way:
+  props: {
+    cdkwar: {
+      type: Array,
+      required: true
+    }
+  },
+  data(){ return data},
+  methods: {
+
+    change(name, op, delta) {
+      let cdkwarData = this.cdkwar;
+      let fact = publicMethods.searchFaction(name, cdkwarData);
       if (fact) {
         if (op === "+") {
           fact.num += delta;
@@ -127,7 +115,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/color";
+@import "../assets/scss/color";
 
 table.warTable {
   background-color: $red-50;
