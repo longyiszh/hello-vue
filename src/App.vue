@@ -10,9 +10,19 @@
       
       <section class="warzone">
         <h2>WarZone [component interaction - props & vue-custom-event]</h2>
-        <h3>(event-bus, life-cycle-hook)</h3>
+        <h3>(event-bus, life-cycle-hook, dynamic-component)</h3>
 
-        <enemy-zone v-bind:bHouse="warZone.bHouse"></enemy-zone> 
+        <div>
+          <button @click="changeWarZone('enemy-zone')">CheckZone1</button>
+          <button @click="changeWarZone('enemy-zone2')">CheckZone2</button>
+        </div>
+
+        <!-- 用keep-alive是为了保留阵营的数据，否则切换到另一组件后再切换回来，原来的内容会重置 -->
+        <keep-alive>
+          <component v-bind:is="warZone.currentChecking" v-bind:bHouse="warZone.bHouse"> </component>
+        </keep-alive>
+        
+        <!-- <enemy-zone v-bind:bHouse="warZone.bHouse"></enemy-zone>  -->
         <!--  v-on:bFire="warZone.sHouse.status=$event" is used when enemyZone directly fires that event -->
 
         <h1 class="vs">VS</h1>
@@ -135,6 +145,7 @@
 <script>
 import cdkWar from './components/cdkWar.vue';
 import enemyZone from './components/enemyZone.vue';
+import enemyZone2 from './components/enemyZone2.vue';
 import foodPresent from './components/foodPresent.vue'
 
 import { busA } from './busA';
@@ -168,6 +179,7 @@ const cdkWarData = {
 };
 
 const warZone = {
+  currentChecking: "enemy-zone",
   sHouse: {
     status: "active"
   },
@@ -207,6 +219,7 @@ export default {
   components: {
     "cdk-war": cdkWar,
     "enemy-zone": enemyZone,
+    "enemy-zone2": enemyZone2,
     "food-present" : foodPresent
   },
   created() {
@@ -231,6 +244,9 @@ export default {
     },
     fireBHouse: () => {
       warZone.bHouse.status = "bz~ bzz~ Boom!";
+    },
+    changeWarZone: (zoneName) => {
+      warZone.currentChecking = zoneName;
     },
 
     // findGuest: (guestName) => {
