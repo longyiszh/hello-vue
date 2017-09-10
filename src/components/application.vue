@@ -54,7 +54,9 @@
         </section>
 
         <footer class="actionBar">
-          <button @click.prevent="postAppData">Submit</button>
+          <button @click.prevent="postAppData()">Submit</button>
+          <button @click.prevent="getExternalData()">Get Ext Data</button>
+          <button @click.prevent="getExternalDataFromAFile()">Get Ext Data From A File</button>
         </footer>
       </form>
     </div>
@@ -159,6 +161,17 @@ export default {
         alert(`Opps! Looks like something's not right. We got ${response.status} from the rear-end. See console for more info.`);
         console.log(response);
       }
+    },
+    async getExternalData() {
+      let baseHtml = "https://jsonplaceholder.typicode.com";
+      let response = await this.$http.get(`${baseHtml}/posts`);
+      let _10Entries = response.body.slice(0, 10);
+      console.log(_10Entries);
+    },
+    async getExternalDataFromAFile() {
+      let baseHtml = "assets/data";
+      let response = await this.$http.get(`/static/data/appData.json`);
+      console.log(response);
     }
   }
 }

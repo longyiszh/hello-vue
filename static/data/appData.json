@@ -1,0 +1,73 @@
+{
+    "username": "",
+    "password": "",
+    "providedInterests": [
+      {
+        "name": "haveMeals",
+        "value": "吃饭",
+        "valueShown": "吃饭"
+      },
+      {
+        "name": "ruaMao",
+        "value": "rua猫",
+        "valueShown": "rua猫"
+      },
+      {
+        "name": "playGames",
+        "value": "打游戏",
+        "valueShown": "打游戏"
+      },
+      {
+        "name": "drink",
+        "value": "喝酒",
+        "valueShown": "喝酒"
+      },
+      {
+        "name": "daGou",
+        "value": "打狗",
+        "valueShown": "打狗"
+      },
+      {
+        "name": "goofAround",
+        "value": "闲逛",
+        "valueShown": "闲逛"
+      },
+      {
+        "name": "qiMaMa",
+        "value": "气妈妈",
+        "valueShown": "气妈妈"
+      }
+    ],
+    "chosenInterests": [],
+    "providedFactions": [
+      {
+        "name": "单身狗",
+        "nameDisplay": "单身狗"
+      },
+      {
+        "name": "月光喵",
+        "nameDisplay": "月光喵"
+      },
+      {
+        "name": "程序猿",
+        "nameDisplay": "程序猿"
+      },
+      {
+        "name": "权限汪",
+        "nameDisplay": "权限汪"
+      },
+      {
+        "name": "死肥豺",
+        "nameDisplay": "死肥豺"
+      },
+      {
+        "name": "CN马",
+        "nameDisplay": "CN马"
+      },
+      {
+        "name": "尖角交",
+        "nameDisplay": "尖角交"
+      }
+    ],
+    "chosenFaction": ""
+  }
