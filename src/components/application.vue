@@ -14,7 +14,7 @@
             <input type="password" placeholder="password" maxlength="100" v-model="appData.password" required>
           </div>
           <div class="interest">
-            <label> Choose Your interests </label>
+            <label> Choose your interests </label>
 
             <div class="intChk" v-for="interest of appData.providedInterests">
               <!-- 把多个checkbox上的v-model设置为同一个数组，即可将它们的value交由vue管理 -->
@@ -22,6 +22,15 @@
               <label> {{ interest.valueShown }} </label>
             </div> 
             
+          </div>
+
+          <div class="faction">
+            <label> Select your faction </label>
+
+            <select name="fact" v-model="appData.chosenFaction">
+              <option v-for="fact of appData.providedFactions" :value="fact.name">{{ fact.nameDisplay }}</option>
+            </select>
+
           </div>
         </main>
 
@@ -38,6 +47,9 @@
             <ul>
               <li v-for="interest of appData.chosenInterests">{{ interest }}</li>
             </ul>
+          </div>
+          <div class="faction">
+            <label> You will be joining <b>{{ appData.chosenFaction }}</b> </label>
           </div>
         </section>
 
@@ -91,7 +103,38 @@ const appData = {
       valueShown: "气妈妈"
     }
   ],
-  chosenInterests: []
+  chosenInterests: [],
+  providedFactions: [
+    {
+      name: "单身狗",
+      nameDisplay: "单身狗"
+    },
+    {
+      name: "月光喵",
+      nameDisplay: "月光喵"
+    },
+    {
+      name: "程序猿",
+      nameDisplay: "程序猿"
+    },
+    {
+      name: "权限汪",
+      nameDisplay: "权限汪"
+    },
+    {
+      name: "死肥豺",
+      nameDisplay: "死肥豺"
+    },
+    {
+      name: "CN马",
+      nameDisplay: "CN马"
+    },
+    {
+      name: "尖角交",
+      nameDisplay: "尖角交"
+    }
+  ],
+  chosenFaction: ""
 }
 
 export default {
