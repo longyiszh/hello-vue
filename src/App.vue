@@ -111,7 +111,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-bind:key="comment" v-for="comment of foodP.pushedComments">
+                  <tr v-for="comment of foodP.pushedComments">
                     <td>{{ comment.date }}</td>
                     <td>{{ comment.username }}</td>
                     <td>{{ comment.comment }}</td>
