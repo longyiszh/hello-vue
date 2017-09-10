@@ -144,8 +144,21 @@ export default {
     };
   },
   methods: {
-    postAppData: () => {
+    async postAppData() {
       console.log(appData);
+      let baseHtml = "https://jsonplaceholder.typicode.com";
+      let response = await this.$http.post(`${baseHtml}/posts`, {
+        title: "application form from hello-vue",
+        id: 998, //dummy
+        userId: 998, //dummy
+        body: appData
+      });
+      if (response.status == 200 || 201) {
+        alert("appData successfully sent");
+      } else {
+        alert(`Opps! Looks like something's not right. We got ${response.status} from the rear-end. See console for more info.`);
+        console.log(response);
+      }
     }
   }
 }
