@@ -6,8 +6,9 @@
     <main class="title">
       <p>Helping wcxaaa learn vue</p>
       <small>{{ sayHello("wcxaaa") }}</small>
+      <hr>
       <cdk-war v-bind:cdkwar="cdkWarData.cdkwar"></cdk-war>
-      
+      <hr>
       <section class="warzone">
         <h2>WarZone [component interaction - props & vue-custom-event]</h2>
         <h3>(event-bus, life-cycle-hook, dynamic-component)</h3>
@@ -36,7 +37,7 @@
           </div>
         </div>
       </section>
-
+      <hr>
       <section>
         <div class="actionBar">
           <button @click="changeIndex(-1)" v-bind:disabled="foodP.currentIndex <= 0"> &lt; </button>
@@ -123,9 +124,8 @@
               <form>
                 <input type="text" placeHolder="名字" name="userName" v-model="foodP.userName" required>
                 <input type="text" placeHolder="吐槽" name="comment" v-model="foodP.comment" required>
-                <!-- v-model也可以加修饰符，比如:lazy，输入完成后才赋值 -->
                 <button @click.prevent="submitContent()">Submit</button>
-              </form>
+              </form> 
             </footer>
           </div>
         </food-present>
@@ -137,6 +137,8 @@
       
 
       </section>
+      <hr>
+      <application></application>
 
     </main>
   </div>
@@ -147,7 +149,8 @@
 import cdkWar from './components/cdkWar.vue';
 import enemyZone from './components/enemyZone.vue';
 import enemyZone2 from './components/enemyZone2.vue';
-import foodPresent from './components/foodPresent.vue'
+import foodPresent from './components/foodPresent.vue';
+import application from './components/application.vue';
 
 import { busA } from './busA';
 
@@ -194,7 +197,7 @@ const foodP = {
   guests: [
     {
       name: "jianjiaojiao",
-      food: ["cotton", "ruaruaChong", "jjjFood"]
+      food: ["cotton", "ruaruaChong", "劣质饲料"]
     },
     {
       name: "BingGanMao",
@@ -221,7 +224,8 @@ export default {
     "cdk-war": cdkWar,
     "enemy-zone": enemyZone,
     "enemy-zone2": enemyZone2,
-    "food-present" : foodPresent
+    "food-present" : foodPresent,
+    "application": application
   },
   created() {
     busA.$on("bFire", (data) => {
