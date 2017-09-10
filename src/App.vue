@@ -123,6 +123,7 @@
               <form>
                 <input type="text" placeHolder="名字" name="userName" v-model="foodP.userName" required>
                 <input type="text" placeHolder="吐槽" name="comment" v-model="foodP.comment" required>
+                <!-- v-model也可以加修饰符，比如:lazy，输入完成后才赋值 -->
                 <button @click.prevent="submitContent()">Submit</button>
               </form>
             </footer>
