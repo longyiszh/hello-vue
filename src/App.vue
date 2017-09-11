@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="root" v-wmode:report="{width: 'narrow'}">
     <header>
       <h1 class="title">{{ title }}</h1>
     </header>
@@ -103,6 +103,7 @@
           </div>
           <div slot="commentArea">
             <div>
+              <h2>[custom directives]</h2>
               <table class="commentTable">
                 <thead>
                   <tr>
@@ -112,7 +113,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="comment of foodP.pushedComments">
+                  <tr v-rainbow class="comment" v-for="comment of foodP.pushedComments">
                     <td>{{ comment.date }}</td>
                     <td>{{ comment.username }}</td>
                     <td>{{ comment.comment }}</td>
@@ -284,6 +285,10 @@ export default {
 
 <style lang="scss">
 @import "assets/scss/color";
+
+div.root {
+  margin: 0px auto;
+}
 
 h1.title {
   text-align: center;
