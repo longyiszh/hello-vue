@@ -141,6 +141,10 @@
       <hr>
       <application></application>
 
+      <hr>
+
+      <pipe></pipe>
+
     </main>
   </div>
   <!-- 只能写一个div，没有第二个 -->
@@ -152,6 +156,7 @@ import enemyZone from './components/enemyZone.vue';
 import enemyZone2 from './components/enemyZone2.vue';
 import foodPresent from './components/foodPresent.vue';
 import application from './components/application.vue';
+import pipe from './components/pipe.vue';
 
 import { busA } from './busA';
 
@@ -226,7 +231,8 @@ export default {
     "enemy-zone": enemyZone,
     "enemy-zone2": enemyZone2,
     "food-present" : foodPresent,
-    "application": application
+    "application": application,
+    "pipe": pipe
   },
   created() {
     busA.$on("bFire", (data) => {

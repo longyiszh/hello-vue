@@ -28,6 +28,15 @@ Vue.directive('wmode', {
   }
 });
 
+// Global filters
+Vue.filter("go-up", (value) => {
+  return value.toUpperCase();
+});
+
+Vue.filter("snip", (value) => {
+  return `${value.slice(0, 100)}...`; 
+});
+
 Vue.use(VueResource);
 
 new Vue({
