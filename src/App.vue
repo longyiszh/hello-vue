@@ -247,6 +247,14 @@ export default {
       foodP: foodP
     }
   },
+  directives: {
+    // 写到这里的directives都是local的，不能被其他组件使用
+    rainbow: {
+      bind(el, binding, vnode) {
+        el.style.color = `#${Math.random().toString().slice(2, 8)}`;
+      }
+    }
+  },
   methods: {
     sayHello: (target) => {
       return `Welcome ${target} to dig your vue (grave)!`

@@ -145,6 +145,10 @@ export default {
       appData: appData
     };
   },
+  directives: {
+    // 写到这里的directives都是local的，不能被其他组件使用
+
+  },
   methods: {
     async postAppData() {
       console.log(appData);

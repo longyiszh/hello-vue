@@ -7,11 +7,12 @@ import VueResource from 'vue-resource';
 //Vue.component("cdk-war", cdkWar);
 
 // Global custom directives
-Vue.directive('rainbow', {
-  bind(el, binding, vnode) {
-    el.style.color = `#${Math.random().toString().slice(2, 8)}`;
-  }
-});
+
+// Vue.directive('rainbow', {
+//   bind(el, binding, vnode) {
+//     el.style.color = `#${Math.random().toString().slice(2, 8)}`;
+//   }
+// });
 
 Vue.directive('wmode', {
   bind(el, binding, vnode) {
@@ -29,9 +30,10 @@ Vue.directive('wmode', {
 });
 
 // Global filters
-Vue.filter("go-up", (value) => {
-  return value.toUpperCase();
-});
+
+// Vue.filter("go-up", (value) => {
+//   return value.toUpperCase();
+// });
 
 Vue.filter("snip", (value) => {
   return `${value.slice(0, 100)}...`; 

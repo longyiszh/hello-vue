@@ -2,7 +2,7 @@
   <section class="pipe">
     <div>
       <h2>Pipes [vue filters]</h2>
-      <h3>{{ ppapData.title| go-up }}</h3>
+      <h3>{{ ppapData.title| goUp }}</h3>
       <p>{{ ppapData.descr| snip }}</p>
     </div>
     <div class="gpanGames">
@@ -126,6 +126,12 @@ export default {
       ppapData: ppapData,
       gpanGames: gpanGames,
       gpanSearch: gpanSearch
+    }
+  },
+  filters: {
+    // 写到这里的filter都是local的，不能被其他组件使用
+    goUp(value) {
+      return value.toUpperCase(); 
     }
   },
   methods: {},
