@@ -145,6 +145,10 @@
 
       <pipe></pipe>
 
+      <hr>
+      <h2>Mixin Test [mixin] - See your console and search for "hahaha"</h2>
+      <button @click="hahaha()"> Click me and then find your hahaha</button>
+
     </main>
   </div>
   <!-- 只能写一个div，没有第二个 -->
@@ -159,6 +163,8 @@ import application from './components/application.vue';
 import pipe from './components/pipe.vue';
 
 import { busA } from './busA';
+
+import haha from './mixins/haha';
 
 
 const cdkWarData = {
@@ -255,6 +261,7 @@ export default {
       }
     }
   },
+  mixins: [haha],
   methods: {
     sayHello: (target) => {
       return `Welcome ${target} to dig your vue (grave)!`
