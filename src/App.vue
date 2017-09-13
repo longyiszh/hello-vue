@@ -10,6 +10,7 @@
           <li><router-link to="/cdkwar">cdkwar</router-link></li>
           <li><router-link to="/foodpresent">foodpresent</router-link></li>
           <li><router-link to="/application">application</router-link></li>
+          <li><router-link to="/pipe">pipe</router-link></li>
         </ul>
       </nav>
 
@@ -45,11 +46,6 @@
           </div>
         </div>
       </section>
-
-      <hr>
-
-      <pipe></pipe>
-
       <hr>
       <h2>Mixin Test [mixin] - See your console and search for "hahaha"</h2>
       <button @click="hahaha()"> Click me and then find your hahaha</button>
