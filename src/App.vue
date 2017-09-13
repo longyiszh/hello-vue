@@ -9,9 +9,9 @@
           <li><router-link to="/index">index</router-link></li>
           <li><router-link to="/cdkwar">cdkwar</router-link></li>
           <li><router-link to="/foodpresent">foodpresent</router-link></li>
+          <li><router-link to="/application">application</router-link></li>
         </ul>
       </nav>
-
 
       <div class="router">
         <router-view></router-view>
@@ -45,10 +45,6 @@
           </div>
         </div>
       </section>
-      <hr>
-
-      <hr>
-      <application></application>
 
       <hr>
 
