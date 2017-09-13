@@ -11,6 +11,7 @@
           <li><router-link to="/foodpresent">foodpresent</router-link></li>
           <li><router-link to="/application">application</router-link></li>
           <li><router-link to="/pipe">pipe</router-link></li>
+          <li><router-link to="/mixin">mixin</router-link></li>
         </ul>
       </nav>
 
@@ -47,25 +48,19 @@
         </div>
       </section>
       <hr>
-      <h2>Mixin Test [mixin] - See your console and search for "hahaha"</h2>
-      <button @click="hahaha()"> Click me and then find your hahaha</button>
-
     </main>
   </div>
   <!-- 只能写一个div，没有第二个 -->
 </template>
 
 <script>
-import cdkWar from './components/cdkWar.vue';
+
 import enemyZone from './components/enemyZone.vue';
 import enemyZone2 from './components/enemyZone2.vue';
-import foodPresent from './components/foodPresent.vue';
-import application from './components/application.vue';
-import pipe from './components/pipe.vue';
 
 import { busA } from './busA';
 
-import haha from './mixins/haha';
+
 
 const warZone = {
   currentChecking: "enemy-zone",
@@ -77,15 +72,10 @@ const warZone = {
   }
 };
 
-
-
 export default {
   components: {
     "enemy-zone": enemyZone,
-    "enemy-zone2": enemyZone2,
-    "food-present" : foodPresent,
-    "application": application,
-    "pipe": pipe
+    "enemy-zone2": enemyZone2
   },
   created() {
     busA.$on("bFire", (data) => {
@@ -99,7 +89,7 @@ export default {
     }
   },
 
-  mixins: [haha],
+  
   methods: {
 
     changeWarZone: (zoneName) => {

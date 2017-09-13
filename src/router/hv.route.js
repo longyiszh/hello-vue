@@ -3,6 +3,7 @@ import cdkWar from "../components/cdkWar.vue";
 import foodPresentGiver from "../components/foodPresentGiver.vue";
 import application from "../components/application.vue";
 import pipe from "../components/pipe.vue";
+import mixinTest from "../components/mixinTest.vue";
 
 
 export const hvRoute = [
@@ -25,5 +26,9 @@ export const hvRoute = [
   {
     path: "/pipe",
     component: pipe
+  },
+  {
+    path: "/mixin",
+    component: mixinTest
   }
 ];
