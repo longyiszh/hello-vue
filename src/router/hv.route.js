@@ -1,5 +1,6 @@
 import index from "../components/index.vue";
 import cdkWar from "../components/cdkWar.vue";
+import ourSide from "../components/ourSide.vue";
 import foodPresentGiver from "../components/foodPresentGiver.vue";
 import application from "../components/application.vue";
 import pipe from "../components/pipe.vue";
@@ -14,6 +15,10 @@ export const hvRoute = [
   {
     path: "/cdkwar",
     component: cdkWar
+  },
+  {
+    path: "/warzone",
+    component: ourSide
   },
   {
     path: "/foodpresent",

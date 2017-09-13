@@ -1,13 +1,13 @@
 <template>
-    <div class="factB">
-      <p><span class="faction">BHouse</span></p>
-      <p><span>{{ bHouse.status }}</span></p>
-      <div class="actionBar">
-        <h3>Actions</h3>
-        <p><button @click="repair()">Repair</button></p>
-        <p><button @click="fireSHouse()">fire tactical nuke to SHouse</button></p>
-      </div>
+  <div class="factB">
+    <p><span class="faction">BHouse</span></p>
+    <p><span>{{ bHouse.status }}</span></p>
+    <div class="actionBar">
+      <h3>Actions</h3>
+      <p><button @click="repair()">Repair</button></p>
+      <p><button @click="fireSHouse()">fire tactical nuke to SHouse</button></p>
     </div>
+  </div>
 </template>
 
 <script>
@@ -42,6 +42,9 @@ export default {
 </script>
 
 <style lang="scss">
-
-
+  div.actionBar {
+    width: 50%;
+    margin: 0.5em auto;
+    border: 1px solid crimson;
+  }
 </style>
