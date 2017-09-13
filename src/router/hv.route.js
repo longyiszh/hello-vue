@@ -1,5 +1,6 @@
 import index from "../components/index.vue";
 import cdkWar from "../components/cdkWar.vue";
+import foodPresentGiver from "../components/foodPresentGiver.vue";
 
 
 export const hvRoute = [
@@ -10,5 +11,9 @@ export const hvRoute = [
   {
     path: "/cdkwar",
     component: cdkWar
+  },
+  {
+    path: "/foodpresent",
+    component: foodPresentGiver
   }
 ];
