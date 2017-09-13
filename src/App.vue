@@ -1,14 +1,21 @@
 <template>
   <div class="root" v-wmode:report="{width: 'narrow'}">
-    <header>
-      <h1 class="title">{{ title }}</h1>
-    </header>
+
     <main class="title">
-      <p>Helping wcxaaa learn vue</p>
-      <small>{{ sayHello("wcxaaa") }}</small>
-      <hr>
-      <cdk-war v-bind:cdkwar="cdkWarData.cdkwar"></cdk-war>
-      <hr>
+
+      <nav class="appNav">
+        <h3>app nav</h3>
+        <ul>
+          <li><router-link to="/index">index</router-link></li>
+          <li><router-link to="/cdkwar">cdkwar</router-link></li>
+        </ul>
+      </nav>
+
+
+      <div class="router">
+        <router-view></router-view>
+      </div>
+
       <section class="warzone">
         <h2>WarZone [component interaction - props & vue-custom-event]</h2>
         <h3>(event-bus, life-cycle-hook, dynamic-component)</h3>
@@ -166,34 +173,6 @@ import { busA } from './busA';
 
 import haha from './mixins/haha';
 
-
-const cdkWarData = {
-  
-  cdkwar: [
-    {
-      name: 'Billy',
-      cdk: 'bdk',
-      num: 0,
-      php: 'http://www.linruotian.com',
-      bFactor: 0.888
-    },
-    {
-      name: 'Mile',
-      cdk: 'mdk',
-      num: 0,
-      php: 'http://www.mile.com',
-      bFactor: 0.999
-    },
-    {
-      name: 'Steve',
-      cdk: 'sdk',
-      num: 0,
-      php: 'http://www.wcnexus.com',
-      bFactor: 1.001
-    }
-  ]
-};
-
 const warZone = {
   currentChecking: "enemy-zone",
   sHouse: {
@@ -233,7 +212,6 @@ const foodP = {
 
 export default {
   components: {
-    "cdk-war": cdkWar,
     "enemy-zone": enemyZone,
     "enemy-zone2": enemyZone2,
     "food-present" : foodPresent,
@@ -248,7 +226,6 @@ export default {
   data() {
     return {
       title: 'hello-vue',
-      cdkWarData: cdkWarData,
       warZone: warZone,
       foodP: foodP
     }
@@ -263,15 +240,7 @@ export default {
   },
   mixins: [haha],
   methods: {
-    sayHello: (target) => {
-      return `Welcome ${target} to dig your vue (grave)!`
-    },
-    repair: () => {
-      warZone.sHouse.status = "active";
-    },
-    fireBHouse: () => {
-      warZone.bHouse.status = "bz~ bzz~ Boom!";
-    },
+
     changeWarZone: (zoneName) => {
       warZone.currentChecking = zoneName;
     },
@@ -305,21 +274,21 @@ export default {
 </script>
 
 <style lang="scss">
-@import "assets/scss/color";
 
 div.root {
   margin: 0px auto;
 }
 
-h1.title {
+main.title {
   text-align: center;
 }
 
-main.title {
-  text-align: center;
-  small {
-    font-weight: bolder;
-    color: $red;
+nav.appNav {
+  ul {
+    list-style-type: none;
+    li {
+      display: inline;
+    }
   }
 }
 

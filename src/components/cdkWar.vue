@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>[v-for] [v-if] [event-binding] [vue-props]</h2>
+    <h2>[v-for] [v-if] [event-binding]</h2>
     <table class="warTable">
       <thead>
         <tr>
@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-bind:key="(faction, index)" v-for="(faction, index) of cdkwar">
+        <tr v-for="(faction, index) of cdkWarData.cdkwar">
           <td>
               <span>{{ index+1 }}</span>
           </td> 
@@ -60,7 +60,32 @@
 
 <script>
 
-const data = {};
+const cdkWarData = {
+  
+  cdkwar: [
+    {
+      name: 'Billy',
+      cdk: 'bdk',
+      num: 0,
+      php: 'http://www.linruotian.com',
+      bFactor: 0.888
+    },
+    {
+      name: 'Mile',
+      cdk: 'mdk',
+      num: 0,
+      php: 'http://www.mile.com',
+      bFactor: 0.999
+    },
+    {
+      name: 'Steve',
+      cdk: 'sdk',
+      num: 0,
+      php: 'http://www.wcnexus.com',
+      bFactor: 1.001
+    }
+  ]
+};
 
 const publicMethods = {
     searchFaction: (factName, factData) => {
@@ -74,21 +99,16 @@ const publicMethods = {
 }
 
 export default {
-  //props: ["cdkwar"],
 
-  // validation way:
-  props: {
-    cdkwar: {
-      type: Array,
-      required: true
-    }
-  },
-  data(){ return data},
+  data() {
+    return {
+      cdkWarData: cdkWarData
+  }},
   methods: {
 
     change(name, op, delta) {
-      let cdkwarData = this.cdkwar;
-      let fact = publicMethods.searchFaction(name, cdkwarData);
+      let cdkwarData = this.cdkWarData;
+      let fact = publicMethods.searchFaction(name, cdkWarData.cdkwar);
       if (fact) {
         if (op === "+") {
           fact.num += delta;
@@ -107,6 +127,14 @@ export default {
       } else {
         alert(`Your bombarding to ${target}'s home page is unsuccessful, so you are going there manually.`);
       }
+    },
+
+    repair: () => {
+      warZone.sHouse.status = "active";
+    },
+
+    fireBHouse: () => {
+      warZone.bHouse.status = "bz~ bzz~ Boom!";
     }
 
   }
