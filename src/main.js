@@ -1,6 +1,17 @@
 import Vue from 'vue';
 import App from './App.vue';
+
 import VueResource from 'vue-resource';
+import VueRouter from "vue-router";
+
+import { hvRoute } from "./router/hv.route";
+
+Vue.use(VueResource);
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+  routes: hvRoute
+});
 
 // Global components
 
@@ -39,9 +50,10 @@ Vue.filter("snip", (value) => {
   return `${value.slice(0, 100)}...`; 
 });
 
-Vue.use(VueResource);
+
 
 new Vue({
   el: '#app',
-  render: h => h(App)
+  render: h => h(App),
+  router: router
 })
