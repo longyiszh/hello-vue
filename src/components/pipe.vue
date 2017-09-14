@@ -15,8 +15,9 @@
       <input type="text" name="searchByRateGt" placeholder="Rate Greater than %" v-model="gpanSearch.byRate">
 
       <article v-for="game of filteredGames">
+        
         <div class="picHolder">
-          <span class="gameTitle">{{ game.nameDisplay }}</span>
+          <span class="gameTitle"><router-link v-bind:to="'/pipe/name/'+game.name">{{ game.nameDisplay }}</router-link></span>
         </div>
         <div class="contentHolder">
           <div class="basicInfo">rate: {{ game.rate*100 }}%</div>

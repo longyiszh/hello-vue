@@ -7,7 +7,7 @@
         <li><router-link to="/warzone">warZone</router-link></li>
         <li><router-link to="/foodpresent">foodpresent</router-link></li>
         <li><router-link to="/application">application</router-link></li>
-        <li><router-link to="/pipe">pipe</router-link></li>
+        <li><router-link to="/pipe/list">pipe</router-link></li>
         <li><router-link to="/mixin">mixin</router-link></li>
       </ul>
     </nav>
@@ -37,11 +37,6 @@ export default {
 </script>
 
 <style lang="scss">
-
-  div.root {
-    
-  }
-
   main.title {
     text-align: center;
     margin: 0px auto;
@@ -51,9 +46,6 @@ export default {
     background-color: #24292e;
     height: 4em;
     padding: 0.125em;
-    // width: 122%;
-    // margin-left: -100%;
-    // padding-left: 100%;
     ul {
       list-style-type: none;
       li {
