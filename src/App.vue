@@ -8,7 +8,7 @@
         <li><router-link to="/foodpresent">foodpresent</router-link></li>
         <li><router-link to="/application">application</router-link></li>
         <li><router-link to="/pipe/list">pipe</router-link></li>
-        <li><router-link to="/mixin">mixin</router-link></li>
+        <li><router-link to="/misc">miscTests</router-link></li>
       </ul>
     </nav>
     <main class="title" v-wmode:report="{width: 'narrow'}">

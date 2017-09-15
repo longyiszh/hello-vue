@@ -5,7 +5,7 @@ import foodPresentGiver from "../components/foodPresentGiver.vue";
 import application from "../components/application.vue";
 import pipe from "../components/pipe.vue";
 import gameDetail from "../components/gameDetail.vue";
-import mixinTest from "../components/mixinTest.vue";
+import miscTest from "../components/miscTest.vue";
 import http404 from "../components/http404.vue";
 
 
@@ -43,8 +43,8 @@ export const hvRoute = [
     component: gameDetail
   },
   {
-    path: "/mixin",
-    component: mixinTest
+    path: "/misc",
+    component: miscTest
   },
   {
     path: "**",
