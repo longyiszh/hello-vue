@@ -3,11 +3,16 @@ import App from './App.vue';
 
 import VueResource from 'vue-resource';
 import VueRouter from "vue-router";
+import VueRx from 'vue-rx';
+import { Observable } from 'rxjs/Observable';
 
 import { hvRoute } from "./router/hv.route";
 
 Vue.use(VueResource);
 Vue.use(VueRouter);
+Vue.use(VueRx, {
+  Observable: Observable
+});
 
 const router = new VueRouter({
   routes: hvRoute
