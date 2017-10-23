@@ -4,11 +4,12 @@
     <div>
       <h2>Mixin Test [mixin] - See your console and search for "hahaha"</h2>
       <button @click="hahaha()"> Click me and then find your hahaha</button>
-      <button @click="getOnlineData()"> Click me to get online data</button>
     </div>
     <div>
       <h2>Rx Test</h2>
       <span>timeElapsed: {{ timeElapsed }}s</span>
+      <p>Online data</p>
+      <span>See console</span>
     </div>
   </section>
 </template>
@@ -17,7 +18,8 @@
 
   import { Observable } from "rxjs/Observable";
   import 'rxjs/add/observable/interval';
-  import 'rxjs/add/operator/filter'
+  import 'rxjs/add/operator/filter';
+
 
   import haha from '../mixins/haha';
 
@@ -32,16 +34,24 @@
         timeElapsed: Observable.interval(1000)
           .filter((value) => {
             return value % 5 === 0
-        })
+        }),
+
+        //OnlineData: this.getRawData(`${baseHtml}/posts`) // < - now working beacuse of the chaotic life-cycle hooks
       }
     },
     created() {
 
     },
+    mounted() {
+      this.getOnlineData();
+    },
     methods: {
       getOnlineData: async function() {
-        let data = await this.getRawData(`${baseHtml}/posts`);
-        console.log(data);
+        let onlineData = await this.getRawData(`${baseHtml}/posts`); // returns promise
+        onlineData
+        .subscribe((next) => {
+          console.log(next);
+        });
       }
     }
   }
