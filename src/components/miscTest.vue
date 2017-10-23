@@ -4,6 +4,7 @@
     <div>
       <h2>Mixin Test [mixin] - See your console and search for "hahaha"</h2>
       <button @click="hahaha()"> Click me and then find your hahaha</button>
+      <button @click="getOnlineData()"> Click me to get online data</button>
     </div>
     <div>
       <h2>Rx Test</h2>
@@ -20,8 +21,12 @@
 
   import haha from '../mixins/haha';
 
+  import data from '../services/data';
+
+  let baseHtml = "https://jsonplaceholder.typicode.com";
+
   export default {
-    mixins: [haha],
+    mixins: [haha, data],
     subscriptions() {
       return {
         timeElapsed: Observable.interval(1000)
@@ -32,6 +37,12 @@
     },
     created() {
 
+    },
+    methods: {
+      getOnlineData: async function() {
+        let data = await this.getRawData(`${baseHtml}/posts`);
+        console.log(data);
+      }
     }
   }
 </script>
