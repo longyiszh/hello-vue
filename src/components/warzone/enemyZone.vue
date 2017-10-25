@@ -12,7 +12,7 @@
 
 <script>
 
-import { busA } from '../busA';
+import { busA } from '../../busA';
 
 export default {
 

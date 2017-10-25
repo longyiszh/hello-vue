@@ -33,7 +33,7 @@
 import enemyZone from './enemyZone.vue';
 import enemyZone2 from './enemyZone2.vue';
 
-import { busA } from '../busA';
+import { busA } from '../../busA';
 
 const warZone = {
   currentChecking: "enemy-zone",

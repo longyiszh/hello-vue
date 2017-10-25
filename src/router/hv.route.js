@@ -1,6 +1,6 @@
 import index from "../components/index.vue";
 import cdkWar from "../components/cdkWar.vue";
-import ourSide from "../components/ourSide.vue";
+//import warzone from "../components/warzone/warzone.vue";
 import foodPresentGiver from "../components/foodPresentGiver.vue";
 import application from "../components/application.vue";
 import pipe from "../components/pipe.vue";
@@ -8,6 +8,8 @@ import gameDetail from "../components/gameDetail.vue";
 import miscTest from "../components/miscTest.vue";
 import http404 from "../components/http404.vue";
 
+// module lazy-loading
+const warzone = () => import(/* webpackChunkName: "group-warzone" */ "../components/warzone/warzone.vue");
 
 export const hvRoute = [
   {
@@ -24,7 +26,7 @@ export const hvRoute = [
   },
   {
     path: "/warzone",
-    component: ourSide
+    component: warzone
   },
   {
     path: "/foodpresent",
