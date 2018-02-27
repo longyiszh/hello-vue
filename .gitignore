@@ -70,3 +70,5 @@ dist/
 *.njsproj
 *.sln
 *.lock
+
+/.vscode/**
