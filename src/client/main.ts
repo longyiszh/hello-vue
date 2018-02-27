@@ -18,6 +18,7 @@ Vue.use(VueRx, {
 });
 
 const router = new VueRouter({
+  mode: 'history',
   routes: appRoute
 });
 

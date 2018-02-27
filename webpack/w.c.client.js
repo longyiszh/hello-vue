@@ -131,14 +131,14 @@ if (process.env.NODE_ENV === 'production') {
 
     new webpack.LoaderOptionsPlugin({
       minimize: true
-    })
+    }),
 
-    // new PrerenderSpaPlugin(
-    //   // Absolute path to compiled SPA
-    //   root('dist/client'),
-    //   // List of routes to prerender
-    //   [ '/', '/cdkwar', '/warzone' ]
-    // )
+    new PrerenderSpaPlugin(
+      // Absolute path to compiled SPA
+      root('dist/client'),
+      // List of routes to prerender
+      [ '/', '/cdkwar', '/warzone' ]
+    )
 
   ])
 }
