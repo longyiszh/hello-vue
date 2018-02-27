@@ -66,7 +66,7 @@
       "enemy-zone2": enemyZone2
     }
   })
-  export default class Dummy extends Vue {
+  export default class Warzone extends Vue {
 
     warZone = {
       currentChecking: "enemy-zone",
