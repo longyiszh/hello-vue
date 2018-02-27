@@ -5,6 +5,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PrerenderSpaPlugin = require('prerender-spa-plugin');
 require('babel-polyfill');
 
 const { root } = require('../lib/helpers');
@@ -126,6 +127,18 @@ if (process.env.NODE_ENV === 'production') {
       compress: {
         warnings: false
       }
+    }),
+
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
     })
+
+    // new PrerenderSpaPlugin(
+    //   // Absolute path to compiled SPA
+    //   root('dist/client'),
+    //   // List of routes to prerender
+    //   [ '/', '/cdkwar', '/warzone' ]
+    // )
+
   ])
 }
