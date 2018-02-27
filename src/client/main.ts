@@ -1,21 +1,24 @@
+// global styles
+import './styles.scss';
+
+import './typings/declarations';
+
 import Vue from 'vue';
 import App from './App.vue';
 
-import VueResource from 'vue-resource';
-import VueRouter from "vue-router";
-import VueRx from 'vue-rx';
+import * as VueRx from 'vue-rx';
 import { Observable } from 'rxjs/Observable';
+import VueRouter from "vue-router";
 
-import { hvRoute } from "./router/hv.route";
+import { appRoute } from "./app.route";
 
-Vue.use(VueResource);
 Vue.use(VueRouter);
 Vue.use(VueRx, {
   Observable: Observable
 });
 
 const router = new VueRouter({
-  routes: hvRoute
+  routes: appRoute
 });
 
 // Global components
@@ -23,15 +26,8 @@ const router = new VueRouter({
 //Vue.component("cdk-war", cdkWar);
 
 // Global custom directives
-
-// Vue.directive('rainbow', {
-//   bind(el, binding, vnode) {
-//     el.style.color = `#${Math.random().toString().slice(2, 8)}`;
-//   }
-// });
-
 Vue.directive('wmode', {
-  bind(el, binding, vnode) {
+  bind(el: any, binding: any, vnode: any) {
     let val = binding.value;
     if (val.width === 'full') {
       el.style.width = '100%';
@@ -47,18 +43,12 @@ Vue.directive('wmode', {
 
 // Global filters
 
-// Vue.filter("go-up", (value) => {
-//   return value.toUpperCase();
-// });
-
-Vue.filter("snip", (value) => {
+Vue.filter("snip", (value: string) => {
   return `${value.slice(0, 100)}...`; 
 });
 
-
-
-new Vue({
+const v = new Vue({
   el: '#app',
-  render: h => h(App),
+  render: (h: any) => h(App),
   router: router
 })

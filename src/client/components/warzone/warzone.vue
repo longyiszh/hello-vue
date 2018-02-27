@@ -29,70 +29,73 @@
   </section>
 </template>
 
-<script>
-import enemyZone from './enemyZone.vue';
-import enemyZone2 from './enemyZone2.vue';
-
-import { busA } from '../../busA';
-
-const warZone = {
-  currentChecking: "enemy-zone",
-  sHouse: {
-    status: "active"
-  },
-  bHouse: {
-    status: "active"
-  }
-};
-
-export default {
-  data() {
-    return {
-      warZone: warZone
-    }
-  },
-  components: {
-    "enemy-zone": enemyZone,
-    "enemy-zone2": enemyZone2
-  },
-  created() {
-    busA.$on("bFire", (data) => {
-      warZone.sHouse.status = data;
-    });
-  },
-  methods: {
-    changeWarZone: (zoneName) => {
-      warZone.currentChecking = zoneName;
-    },
-    repair: () => {
-      warZone.sHouse.status = "active";
-    },
-    fireBHouse: () => {
-      warZone.bHouse.status = "bz~ bzz~ Boom!";
-    }
-  }
-}
-</script>
-
 <style lang="scss" scoped>
   section.warzone {
-      border: 1px dashed #5e5e5e;
-      text-align: center;
+    border: 1px dashed #5e5e5e;
+    text-align: center;
   }
 
-  section.warzone h1.vs {
-      font-size: 3em;
-      font-weight: bolder;
+  h1.vs {
+    font-size: 3em;
+    font-weight: bolder;
   }
 
-  section.warzone span.faction {
-      font-weight: bolder;
+  span.faction {
+    font-weight: bolder;
   }
 
-  section.warzone div.actionBar {
-      width: 50%;
-      margin: 0.5em auto;
-      border: 1px solid crimson;
+  div.actionBar {
+    width: 50%;
+    margin: 0.5em auto;
+    border: 1px solid crimson;
   }
 </style>
+
+<script lang="ts">
+  import Vue from 'vue';
+  import Component from 'vue-class-component';
+
+  import enemyZone from './enemyZone.vue';
+  import enemyZone2 from './enemyZone2.vue';
+
+  import { busA } from '../../busA';
+
+  @Component({
+    components: {
+      "enemy-zone": enemyZone,
+      "enemy-zone2": enemyZone2
+    }
+  })
+  export default class Dummy extends Vue {
+
+    warZone = {
+      currentChecking: "enemy-zone",
+      sHouse: {
+        status: "active"
+      },
+      bHouse: {
+        status: "active"
+      }
+    };
+
+    changeWarZone = (zoneName: string) => {
+      this.warZone.currentChecking = zoneName;
+    };
+
+    repair = () => {
+      this.warZone.sHouse.status = "active";
+    };
+
+    fireBHouse = () => {
+      this.warZone.bHouse.status = "bz~ bzz~ Boom!";
+    };
+
+    created() {
+      busA.$on("bFire", (data: string) => {
+        this.warZone.sHouse.status = data;
+      });
+    }
+
+  }
+</script>
 

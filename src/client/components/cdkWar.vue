@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <h2>[v-for] [v-if] [event-binding]</h2>
     <table class="warTable">
       <thead>
@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(faction, index) of cdkWarData.cdkwar">
+        <tr v-for="(faction, index) of cdkwar" :key="index">
           <td>
               <span>{{ index+1 }}</span>
           </td> 
@@ -55,60 +55,71 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </section>
 </template>
 
-<script>
+<style lang="scss" scoped>
+  @import "../assets/scss/color";
 
-const cdkWarData = {
-  
-  cdkwar: [
-    {
-      name: 'Billy',
-      cdk: 'bdk',
-      num: 0,
-      php: 'http://www.linruotian.com',
-      bFactor: 0.888
-    },
-    {
-      name: 'Mile',
-      cdk: 'mdk',
-      num: 0,
-      php: 'http://www.mile.com',
-      bFactor: 0.999
-    },
-    {
-      name: 'Steve',
-      cdk: 'sdk',
-      num: 0,
-      php: 'http://www.wcnexus.com',
-      bFactor: 1.001
+  table.warTable {
+    background-color: $red-50;
+    border: 0px;
+    margin: 0px auto;
+    tr {
+      border: 0px;
     }
-  ]
-};
+    tr:nth-of-type(odd) {
+      border: 0px;
+      background-color: $red;
+    }
+    td {
+      border: 0px;
+    }
+  }
+</style>
 
-const publicMethods = {
-    searchFaction: (factName, factData) => {
+<script lang="ts">
+  import Vue from 'vue';
+  import Component from 'vue-class-component';
+
+  @Component
+  export default class CDKWar extends Vue {
+
+    cdkwar: any[] = [
+      {
+        name: 'Billy',
+        cdk: 'bdk',
+        num: 0,
+        php: 'http://www.linruotian.com',
+        bFactor: 0.888
+      },
+      {
+        name: 'Mile',
+        cdk: 'mdk',
+        num: 0,
+        php: 'http://www.mile.com',
+        bFactor: 0.999
+      },
+      {
+        name: 'Steve',
+        cdk: 'sdk',
+        num: 0,
+        php: 'http://www.wcnexus.com',
+        bFactor: 1.001
+      }
+    ];
+
+    searchFaction = (factName: string, factData: any[]) => {
       for (let fact of factData) {
         if (factName === fact.name) {
           return fact;
         }
       }
       return null;
-    },
-}
+    };
 
-export default {
-
-  data() {
-    return {
-      cdkWarData: cdkWarData
-  }},
-  methods: {
-
-    change(name, op, delta) {
-      let cdkwarData = this.cdkWarData;
-      let fact = publicMethods.searchFaction(name, cdkWarData.cdkwar);
+    change(name: string, op: string, delta: number) {
+      let fact = this.searchFaction(name, this.cdkwar);
       if (fact) {
         if (op === "+") {
           fact.num += delta;
@@ -119,47 +130,25 @@ export default {
       } else {
         console.error("Invalid faction name");
       }
-    },
+    }
 
-    bombardPHP: (target, factor) => {
+    bombardPHP = (target: string, factor: number) => {
       if (factor <= 1) {
         alert(`${target} has prevented your bombarding.`);
       } else {
         alert(`Your bombarding to ${target}'s home page is unsuccessful, so you are going there manually.`);
       }
-    },
+    };
 
-    repair: () => {
-      warZone.sHouse.status = "active";
-    },
+    // repair = () => {
+    //   (<any>warZone).sHouse.status = "active";
+    // };
 
-    fireBHouse: () => {
-      warZone.bHouse.status = "bz~ bzz~ Boom!";
-    }
+    // fireBHouse = () => {
+    //   (<any>warZone).bHouse.status = "bz~ bzz~ Boom!";
+    // };
+
 
   }
-  
-}
 </script>
-
-<style lang="scss" scoped>
-@import "../assets/scss/color";
-
-table.warTable {
-  background-color: $red-50;
-  border: 0px;
-  margin: 0px auto;
-  tr {
-    border: 0px;
-  }
-  tr:nth-of-type(odd) {
-    border: 0px;
-    background-color: $red;
-  }
-  td {
-    border: 0px;
-  }
-}
-
-</style>
 
