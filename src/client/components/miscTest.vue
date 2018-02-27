@@ -14,49 +14,52 @@
   </section>
 </template>
 
-<script>
+<style lang="scss" scoped>
 
+</style>
+
+<script lang="ts">
+
+  import Component, { mixins } from 'vue-class-component';
   import { Observable } from "rxjs/Observable";
   import 'rxjs/add/observable/interval';
   import 'rxjs/add/operator/filter';
 
 
-  import haha from '../mixins/haha';
+  import {Haha} from '../mixins/haha';
 
-  import data from '../services/data';
+  import {DataService} from '../mixins/data.service';
 
   let baseHtml = "https://jsonplaceholder.typicode.com";
 
-  export default {
-    mixins: [haha, data],
+
+  @Component
+  export default class MiscTest extends mixins(Haha, DataService) {
+
+    timeElapsed: number = 0;
+
+    async getOnlineData() {
+      let onlineData = await this.getData(`${baseHtml}/posts`); // returns promise
+      onlineData
+      .subscribe((next) => {
+        console.log(next);
+      });
+    }
+
+    mounted() {
+      this.getOnlineData();
+    }
+
     subscriptions() {
       return {
         timeElapsed: Observable.interval(1000)
           .filter((value) => {
-            return value % 5 === 0
+            return value % 5 === 0;
         }),
 
         //OnlineData: this.getRawData(`${baseHtml}/posts`) // < - now working beacuse of the chaotic life-cycle hooks
       }
-    },
-    created() {
-
-    },
-    mounted() {
-      this.getOnlineData();
-    },
-    methods: {
-      getOnlineData: async function() {
-        let onlineData = await this.getRawData(`${baseHtml}/posts`); // returns promise
-        onlineData
-        .subscribe((next) => {
-          console.log(next);
-        });
-      }
     }
+
   }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

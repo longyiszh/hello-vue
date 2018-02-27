@@ -18,17 +18,6 @@
   </section>
 </template>
 
-<script>
-export default {
-  data() {
-      return {}
-  },
-  methods: {
-
-  }
-}
-</script>
-
 <style lang="scss" scoped>
   div.bigTable {
     border: 1px dashed indigo;
@@ -68,6 +57,17 @@ export default {
     }
 
   }
-
 </style>
+
+<script lang="ts">
+  import Vue from 'vue';
+  import Component from 'vue-class-component';
+
+  @Component
+  export default class FoodPresent extends Vue {
+
+  }
+</script>
+
+
 

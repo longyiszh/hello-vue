@@ -74,7 +74,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-rainbow class="comment" v-for="comment of foodP.pushedComments">
+              <tr v-rainbow class="comment" v-for="(comment, index) of foodP.pushedComments" :key="index">
                 <td>{{ comment.date }}</td>
                 <td>{{ comment.username }}</td>
                 <td>{{ comment.comment }}</td>
@@ -92,85 +92,84 @@
       </div>
     </food-present>
 
-  <h1>slot 总结一下！</h1>
-  <p>有slot的组件相当于一个框架，由其他开发人员往slot里面扔自定义的html</p>
-  <p>slot 由name名字来区分，如果没有在slot上写名字，那么就是饼干猫hack的地方。</p>
-  <p>数据及函数操作由父组件负责，样式由slot那个组件负责</p>
+    <h1>slot 总结一下！</h1>
+    <p>有slot的组件相当于一个框架，由其他开发人员往slot里面扔自定义的html</p>
+    <p>slot 由name名字来区分，如果没有在slot上写名字，那么就是饼干猫hack的地方。</p>
+    <p>数据及函数操作由父组件负责，样式由slot那个组件负责</p>
   
 
   </section>
 </template>
 
-<script>
-
-import foodPresent from './foodPresent.vue';
-
-const foodP = {
-  currentIndex: 0,
-  guests: [
-    {
-      name: "jianjiaojiao",
-      food: ["cotton", "ruaruaChong", "劣质饲料"]
-    },
-    {
-      name: "BingGanMao",
-      food: ["皇家猫粮", "雪域小馒头", "进口奥利奥"]
-    },
-    {
-      name: "wc",
-      food: ["pepper", "salad", "burger"]
-    }
-  ],
-  userName: "",
-  comment: "怒戳楼上！",
-  pushedComments: [
-    {
-      username: "jianjiaojiao",
-      date: new Date("2017-09-09"),
-      comment: "原来你喜欢吃我叮剩下的啊～"
-    }
-  ]
-}
-
-export default {
-
-  components: {
-    "food-present" : foodPresent
-  },
-  data() {
-    return {
-      foodP: foodP
-    }
-  },
-  methods: {
-    changeIndex: (num) => {
-      let indexAfter = foodP.currentIndex + num;
-      if (indexAfter >= 0 && indexAfter < foodP.guests.length) {
-        foodP.currentIndex += num;
-      }
-    },
-    submitContent: () => {
-      if (foodP.userName.length > 0 && foodP.comment.length > 0) {
-        foodP.pushedComments.push({
-          username: foodP.userName,
-          date: new Date(),
-          comment: foodP.comment
-        });
-      }
-    }
-  },
-  directives: {
-    // 写到这里的directives都是local的，不能被其他组件使用
-    rainbow: {
-      bind(el, binding, vnode) {
-        el.style.color = `#${Math.random().toString().slice(2, 8)}`;
-      }
-    }
-  }
-  
-}
-</script>
-
 <style lang="scss" scoped>
 
 </style>
+
+<script lang="ts">
+  import Vue from 'vue';
+  import Component from 'vue-class-component';
+
+  import foodPresent from './foodPresent.vue';
+
+  @Component({
+    components: {
+      "food-present" : foodPresent
+    },
+    directives: {
+      // 写到这里的directives都是local的，不能被其他组件使用
+      rainbow: {
+        bind(el: any, binding: any, vnode: any) {
+          el.style.color = `#${Math.random().toString().slice(2, 8)}`;
+        }
+      }
+    }
+  })
+  export default class FoodPresentGiver extends Vue {
+
+    foodP = {
+      currentIndex: 0,
+      guests: [
+        {
+          name: "jianjiaojiao",
+          food: ["cotton", "ruaruaChong", "劣质饲料"]
+        },
+        {
+          name: "BingGanMao",
+          food: ["皇家猫粮", "雪域小馒头", "进口奥利奥"]
+        },
+        {
+          name: "wc",
+          food: ["pepper", "salad", "burger"]
+        }
+      ],
+      userName: "",
+      comment: "怒戳楼上！",
+      pushedComments: [
+        {
+          username: "jianjiaojiao",
+          date: new Date("2017-09-09"),
+          comment: "原来你喜欢吃我叮剩下的啊～"
+        }
+      ]
+    }
+
+    changeIndex = (num: number) => {
+      let indexAfter = this.foodP.currentIndex + num;
+      if (indexAfter >= 0 && indexAfter < this.foodP.guests.length) {
+        this.foodP.currentIndex += num;
+      }
+    };
+
+    submitContent = () => {
+      if (this.foodP.userName.length > 0 && this.foodP.comment.length > 0) {
+        this.foodP.pushedComments.push({
+          username: this.foodP.userName,
+          date: new Date(),
+          comment: this.foodP.comment
+        });
+      }
+    };
+
+    
+  }
+</script>
