@@ -1,8 +1,10 @@
 const { resolve, join } = require('path');
 const { readdirSync } = require('fs');
 
+const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 const { root } = require('../lib/helpers');
 const serverpath = root('src/server');
@@ -58,11 +60,18 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin([root("dist/server")], {root: root("dist"), verbose: false}),
+    new webpack.DefinePlugin({
+      'process.env': 'production',
+      'process.env.VUE_ENV': '"server"'
+    }),
+    new CleanWebpackPlugin([`${root("dist/server")}/**`], {root: root("dist"), verbose: false}),
     new CopyWebpackPlugin([
       { 
         from: resolve(serverpath, "config"),
-        to: 'config' 
+        to: 'config',
+        ignore: [
+          ".gitkeep"
+        ]
       },
       { 
         from: resolve(serverpath, "static"),
@@ -71,14 +80,16 @@ module.exports = {
           ".gitkeep"
         ]
       }
-    ])
+    ]),
+
   ],
 
   output: {
     path: root('dist/server'),
     publicPath: '/',
     filename: '[name].js',
-    chunkFilename: '[id].[hash].chunk.js'
+    chunkFilename: '[id].[hash].chunk.js',
+    libraryTarget: 'commonjs2'
   }
 
 
