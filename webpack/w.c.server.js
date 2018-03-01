@@ -88,8 +88,7 @@ module.exports = {
     path: root('dist/server'),
     publicPath: '/',
     filename: '[name].js',
-    chunkFilename: '[id].[hash].chunk.js',
-    libraryTarget: 'commonjs2'
+    chunkFilename: '[id].[hash].chunk.js'
   }
 
 
