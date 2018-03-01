@@ -10,8 +10,8 @@
     "serve:c": "cross-env NODE_ENV=development webpack-dev-server --config webpack/w.c.client --progress --inline --hot",
     "build": "npm run build:c && npm run build:s",
     "build:c": "cross-env NODE_ENV=production webpack --config webpack/w.c.client --progress --hide-modules",
-    "build:s": "webpack --config webpack/w.c.server",
-    "build:cssr": "webpack --config webpack/ssr/w.c.client.ssr && webpack --config webpack/ssr/w.c.server.ssr"
+    "build:s": "cross-env NODE_ENV=production webpack --config webpack/w.c.server",
+    "build:cssr": "cross-env NODE_ENV=production webpack --config webpack/ssr/w.c.client.ssr && cross-env NODE_ENV=production webpack --config webpack/ssr/w.c.server.ssr"
   },
   "optionalDependencies": {
     "axios": "^0.17.0",

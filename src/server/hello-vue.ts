@@ -9,7 +9,7 @@ import * as serve from 'koa-static';
 import * as bodyParser from 'koa-bodyparser';
 import * as cors from "@koa/cors";
 
-import {createBundleRenderer} from 'vue-server-renderer';
+import { createBundleRenderer } from 'vue-server-renderer';
 
 // import { api } from './router/api';
 
@@ -23,7 +23,14 @@ app.use(bodyParser());
 app.use(cors());
 
 const serverBundle = readFileSync(join(clientPath, 'bundle.server.js'), 'utf8');
+const index = readFileSync(join(clientPath, 'index.html'), 'utf8');
 const serverRenderer = createBundleRenderer(serverBundle);
+
+
+// const serverBundle2 = require(join(clientPath, 'bundle.server.js'));
+// const serverRenderer2 = createRenderer({
+//   template: index
+// });
 
 const clientBundleFileUrl = '/bundle.client.js';
 
@@ -39,12 +46,12 @@ const clientBundleFileUrl = '/bundle.client.js';
 //   await send(ctx, clientBundle, { root: '/' });
 // });
 
-router.get('/', async (ctx, next) => {
+router.get('/*', async (ctx, next) => {
 
   let html: string = '';
 
   try {
-    html = await serverRenderer.renderToString();
+    html = await serverRenderer.renderToString({url: ctx.url});
   } catch (err) {
     console.error(err);
     ctx.status = 500;
@@ -54,19 +61,38 @@ router.get('/', async (ctx, next) => {
     return;
   }
 
-  ctx.body = `
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="utf-8">
-      <title>Hello Vue</title>
-    </head>
-    <body>
-      ${html}
-      <script src="${clientBundleFileUrl}"></script>
-    </body>
-  </html>
-  `
+  ctx.body = index.replace('<div id="app"></div>', html);
+
+  // let app = await serverBundle2.default({ url: ctx.req.url });
+  // const context = {
+  //   title: 'Hello vue - Server Render'
+  // }
+
+  // let html: string = '';
+
+  // try {
+  //   html = await serverRenderer2.renderToString(app, context);
+  // } catch (err) {
+  //   console.error(err);
+  //   if (err.code === 404) {
+  //     ctx.status = 404;
+  //     ctx.body = {
+  //       msg: "Page not found"
+  //     }
+  //     return;
+  //   } else if (err.code === 500) {
+  //     ctx.status = 500;
+  //     ctx.body = {
+  //       msg: "Server Rendering error"
+  //     }
+  //     return;
+  //   }
+
+  //   ctx.body = html;
+
+  //   return;
+  // }
+
 
 });
 

@@ -69,7 +69,12 @@ module.exports = {
         /* Global scss */
         test: /\.scss$/,
         include: resolve(clientpath, 'styles.scss'), 
-        use: [ 'css-loader?sourceMap', 'postcss-loader', 'sass-loader']
+        use: ExtractTextPlugin.extract(
+          {
+            fallback: 'style-loader',
+            use: [ 'css-loader?sourceMap', 'postcss-loader', 'sass-loader']
+          }
+        )
       }
     ]
   },
@@ -90,20 +95,20 @@ module.exports = {
   },
   devtool: '#eval-source-map',
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   filename: 'index.html',
-    //   template: resolve(clientpath, 'index.html')
-    // }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: resolve(clientpath, 'index.html')
+    }),
 
-    // new CopyWebpackPlugin([
-    //   { 
-    //     from: resolve(clientpath, 'statics'),
-    //     to: 'statics',
-    //     ignore: [".gitkeep"]
-    //   }
-    // ]),
+    new CopyWebpackPlugin([
+      { 
+        from: resolve(clientpath, 'statics'),
+        to: 'statics',
+        ignore: [".gitkeep"]
+      }
+    ]),
 
-    // new ExtractTextPlugin("styles.css")
+    new ExtractTextPlugin("styles.css")
 
   ]
 }
@@ -118,7 +123,7 @@ if (process.env.NODE_ENV === 'production') {
       }
     }),
 
-    // new CleanWebpackPlugin([`${root('dist/client')}/**`], {root: root(), verbose: true}),
+    new CleanWebpackPlugin([`${root('dist/client')}/**`], {root: root(), verbose: true}),
 
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
