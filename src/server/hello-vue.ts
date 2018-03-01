@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { readFileSync } from 'fs';
 
 import * as Koa from 'koa';
@@ -22,9 +22,20 @@ app.use(logger());
 app.use(bodyParser());
 app.use(cors());
 
-const serverBundle = readFileSync(join(clientPath, 'bundle.server.js'), 'utf8');
+// const serverBundle = readFileSync(join(clientPath, 'bundle.server.js'), 'utf8');
+// const serverBundle = require(resolve(clientPath, 'vue-ssr-server-bundle.json'));
+const serverBundle = JSON.parse(readFileSync(join(clientPath, 'vue-ssr-server-bundle.json'), 'utf8'));
+
+
+// const clientManifest  = require(resolve(clientPath, 'vue-ssr-client-manifest.json'));
+const clientManifest = JSON.parse(readFileSync(join(clientPath, 'vue-ssr-client-manifest.json'), 'utf8'));
+// const serverBundle0 = readFileSync(join(clientPath, '0.bundle.server.js'), 'utf8');
 const index = readFileSync(join(clientPath, 'index.html'), 'utf8');
-const serverRenderer = createBundleRenderer(serverBundle);
+// const serverRenderer = createBundleRenderer(serverBundle);
+const serverRenderer = createBundleRenderer(serverBundle, {
+  runInNewContext: false, // 推荐
+  clientManifest: clientManifest
+})
 
 
 // const serverBundle2 = require(join(clientPath, 'bundle.server.js'));
@@ -32,7 +43,7 @@ const serverRenderer = createBundleRenderer(serverBundle);
 //   template: index
 // });
 
-const clientBundleFileUrl = '/bundle.client.js';
+// const clientBundleFileUrl = '/bundle.client.js';
 
 // root route and sub route settings
 
@@ -48,7 +59,7 @@ const clientBundleFileUrl = '/bundle.client.js';
 
 router.get('/*', async (ctx, next) => {
 
-  let html: string = '';
+  let html = '';
 
   try {
     html = await serverRenderer.renderToString({url: ctx.url});
@@ -62,6 +73,7 @@ router.get('/*', async (ctx, next) => {
   }
 
   ctx.body = index.replace('<div id="app"></div>', html);
+  // ctx.body = html;
 
   // let app = await serverBundle2.default({ url: ctx.req.url });
   // const context = {

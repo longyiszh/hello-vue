@@ -5,6 +5,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 require('babel-polyfill');
 
 const { root } = require('../../lib/helpers');
@@ -134,7 +135,9 @@ if (process.env.NODE_ENV === 'production') {
 
     new webpack.LoaderOptionsPlugin({
       minimize: true
-    })
+    }),
+
+    new VueSSRClientPlugin()
 
   ])
 }

@@ -1,31 +1,33 @@
 const { join, resolve } = require('path');
-const { readdirSync } = require('fs');
+// const { readdirSync } = require('fs');
+
+const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
+const nodeExternals = require('webpack-node-externals')
 
 // const webpack = require('webpack');
 // const ExtractTextPlugin = require("extract-text-webpack-plugin");
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
 // const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
-require('babel-polyfill');
+// require('babel-polyfill');
 
 const { root } = require('../../lib/helpers');
 const clientpath = root('src/client');
 
-let nodeModules = {};
+// let nodeModules = {};
 
-readdirSync('node_modules')
-  .filter((x) => {
-    return ['.bin'].indexOf(x) === -1;
-  })
-  .forEach((mod) => {
-    nodeModules[mod] = 'commonjs ' + mod;
-  });
+// readdirSync('node_modules')
+//   .filter((x) => {
+//     return ['.bin'].indexOf(x) === -1;
+//   })
+//   .forEach((mod) => {
+//     nodeModules[mod] = 'commonjs ' + mod;
+//   });
 
 
 module.exports = {
   entry: {
     main: [
-      'babel-polyfill',
       resolve(clientpath, 'server-entry.ts')
     ]
   },
@@ -36,7 +38,12 @@ module.exports = {
     libraryTarget: 'commonjs2' // !different
   },
 
-  externals: nodeModules,
+  externals: nodeExternals({
+    // 不要外置化 webpack 需要处理的依赖模块。
+    // 你可以在这里添加更多的文件类型。例如，未处理 *.vue 原始文件，
+    // 你还应该将修改 `global`（例如 polyfill）的依赖模块列入白名单
+    whitelist: [/\.css$/, /\.vue$/, /\.scss$/]
+  }),
 
   target: 'node', // !different
 
@@ -103,7 +110,7 @@ module.exports = {
       warnings: false
     }
   },
-  devtool: '#eval-source-map',
+  devtool: '#source-map',
   plugins: [
     // new HtmlWebpackPlugin({
     //   filename: 'index.html',
@@ -119,6 +126,8 @@ module.exports = {
     // ]),
 
     // new ExtractTextPlugin("styles.css")
+
+    new VueSSRServerPlugin()
 
   ]
 }
