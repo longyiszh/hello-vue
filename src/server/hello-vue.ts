@@ -53,6 +53,11 @@ router.get('/*', async (ctx, next) => {
 
 });
 
+// restore back to SPA by uncommenting these lines and commenting above route
+// router.get('/*', async (ctx, next) => {
+//   await send(ctx, join(clientPath, 'index.html'), { root: '/' });
+// });
+
 
 app.use(serve(clientPath));
 

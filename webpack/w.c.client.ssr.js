@@ -1,7 +1,6 @@
 const merge = require('webpack-merge');
 
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
-require('babel-polyfill');
 
 const { root } = require('../lib/helpers');
 
