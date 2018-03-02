@@ -11,6 +11,9 @@
       <p>Online data</p>
       <span>See console</span>
     </div>
+    <div>
+      <img src="../assets/logo.png" alt="logo" class="fluid">
+    </div>
   </section>
 </template>
 

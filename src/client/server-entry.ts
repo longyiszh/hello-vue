@@ -1,30 +1,15 @@
 // server-entry
-import Vue from 'vue';
-import App from './App.vue';
-
-import { createApp } from './entry';
+import { createApp } from './create-app';
 import { appRouter } from "./app.router";
-
-// const app = new Vue({
-//   el: '#app',
-//   // the root instance simply renders the App component.
-//   render: h => h(App),
-//   router: appRouter
-// });
 
 // the default export should be a function
 // which will receive the context of the render call
 export default (context: any) => {
 
   return new Promise((resolve, reject) => {
-    //const app = createApp();
-    const app = new Vue({
-      el: '#app',
-      render: (h: any) => h(App),
-      router: appRouter
-    });
+    const app = createApp();
+
     // app.fetchServerData(context);
-    console.log(context)
     appRouter.push(context.url);
     appRouter.onReady(
       () => {

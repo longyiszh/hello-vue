@@ -1,25 +1,12 @@
-// global styles
-import './styles.scss';
-
-import './typings/declarations';
-
 import Vue from 'vue';
 import App from './App.vue';
-
 import * as VueRx from 'vue-rx';
 import { Observable } from 'rxjs/Observable';
-import VueRouter from "vue-router";
 
-import { appRoute } from "./app.route";
+import { appRouter } from "./app.router";
 
-Vue.use(VueRouter);
 Vue.use(VueRx, {
   Observable: Observable
-});
-
-const router = new VueRouter({
-  mode: 'hash',
-  routes: appRoute
 });
 
 // Global components
@@ -48,8 +35,13 @@ Vue.filter("snip", (value: string) => {
   return `${value.slice(0, 100)}...`; 
 });
 
-const v = new Vue({
-  el: '#app',
-  render: (h: any) => h(App),
-  router: router
-})
+export const createApp = () => {
+
+  const app = new Vue({
+    el: '#app',
+    render: (h: any) => h(App),
+    router: appRouter
+  });
+
+  return app;
+};

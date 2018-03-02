@@ -7,11 +7,11 @@
   "scripts": {
     "start": "node dist/server/hello-vue",
     "serve": "npm run serve:c",
-    "serve:c": "cross-env NODE_ENV=development webpack-dev-server --config webpack/w.c.client --progress --inline --hot",
+    "serve:c": "cross-env NODE_ENV=development webpack-dev-server --config webpack/w.c.client.spa --progress --inline --hot",
     "build": "npm run build:c && npm run build:s",
-    "build:c": "cross-env NODE_ENV=production webpack --config webpack/w.c.client --progress --hide-modules",
+    "build:c": "cross-env NODE_ENV=production webpack --config webpack/w.c.client.spa --progress --hide-modules",
     "build:s": "cross-env NODE_ENV=production webpack --config webpack/w.c.server",
-    "build:cssr": "cross-env NODE_ENV=production webpack --config webpack/ssr/w.c.client.ssr && cross-env NODE_ENV=production webpack --config webpack/ssr/w.c.server.ssr"
+    "build:ssr": "cross-env NODE_ENV=production webpack --config webpack/w.c.client.ssr && cross-env NODE_ENV=production webpack --config webpack/w.c.server.ssr"
   },
   "optionalDependencies": {
     "axios": "^0.17.0",
@@ -61,6 +61,7 @@
     "vue-template-compiler": "^2.5.0",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1",
+    "webpack-merge": "^4.1.2",
     "webpack-node-externals": "^1.6.0"
   }
 }

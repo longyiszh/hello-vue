@@ -22,40 +22,17 @@ app.use(logger());
 app.use(bodyParser());
 app.use(cors());
 
-// const serverBundle = readFileSync(join(clientPath, 'bundle.server.js'), 'utf8');
-// const serverBundle = require(resolve(clientPath, 'vue-ssr-server-bundle.json'));
+// 坑：不可以require一个json文件，因为webpack里的require和node里的require不！一！样！
 const serverBundle = JSON.parse(readFileSync(join(clientPath, 'vue-ssr-server-bundle.json'), 'utf8'));
-
-
-// const clientManifest  = require(resolve(clientPath, 'vue-ssr-client-manifest.json'));
 const clientManifest = JSON.parse(readFileSync(join(clientPath, 'vue-ssr-client-manifest.json'), 'utf8'));
-// const serverBundle0 = readFileSync(join(clientPath, '0.bundle.server.js'), 'utf8');
+
+// template
 const index = readFileSync(join(clientPath, 'index.html'), 'utf8');
-// const serverRenderer = createBundleRenderer(serverBundle);
+
 const serverRenderer = createBundleRenderer(serverBundle, {
-  runInNewContext: false, // 推荐
+  runInNewContext: false,
   clientManifest: clientManifest
 })
-
-
-// const serverBundle2 = require(join(clientPath, 'bundle.server.js'));
-// const serverRenderer2 = createRenderer({
-//   template: index
-// });
-
-// const clientBundleFileUrl = '/bundle.client.js';
-
-// root route and sub route settings
-
-// router.use('/api', api.routes(), api.allowedMethods())
-// router.get('/*', async (ctx, next) => {
-//   await send(ctx, join(clientPath, 'index.html'), { root: '/' });
-// });
-
-// router.get(clientBundleFileUrl, async (ctx) => {
-//   const clientBundle = readFileSync(join(clientPath, 'bundle.client.js'), 'utf8');
-//   await send(ctx, clientBundle, { root: '/' });
-// });
 
 router.get('/*', async (ctx, next) => {
 
@@ -73,38 +50,6 @@ router.get('/*', async (ctx, next) => {
   }
 
   ctx.body = index.replace('<div id="app"></div>', html);
-  // ctx.body = html;
-
-  // let app = await serverBundle2.default({ url: ctx.req.url });
-  // const context = {
-  //   title: 'Hello vue - Server Render'
-  // }
-
-  // let html: string = '';
-
-  // try {
-  //   html = await serverRenderer2.renderToString(app, context);
-  // } catch (err) {
-  //   console.error(err);
-  //   if (err.code === 404) {
-  //     ctx.status = 404;
-  //     ctx.body = {
-  //       msg: "Page not found"
-  //     }
-  //     return;
-  //   } else if (err.code === 500) {
-  //     ctx.status = 500;
-  //     ctx.body = {
-  //       msg: "Server Rendering error"
-  //     }
-  //     return;
-  //   }
-
-  //   ctx.body = html;
-
-  //   return;
-  // }
-
 
 });
 
